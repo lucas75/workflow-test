@@ -25,11 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Main Repo
         uses: actions/checkout@v4
+        with:
+          path: main
 
       - name: Checkout Aditional Repo
         uses: actions/checkout@v4
         with: 
-          path: ../test
+          path: test
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
