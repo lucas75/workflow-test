@@ -37,6 +37,7 @@ jobs:
 
       - name: Move additional repo to be a sibling of the main repo
         run: |
+          echo "${PWD}"
           mv "additional-repositories/*" ".."          
 
       - name: Tree Affter Fix Locations
