@@ -31,6 +31,11 @@ jobs:
         with: 
           path: ${GITHUB_WORKSPACE}/repo2
 
+      - name: Checkout Aditional Repo
+        uses: actions/checkout@v4
+        with: 
+          path: additional-repositories/repo2
+
       - name: Tree Affter Checkout
         run: |
           tree $GITHUB_WORKSPACE/..
@@ -38,7 +43,7 @@ jobs:
       - name: Move additional repo to be a sibling of the main repo
         run: |
           echo "${PWD}"
-          mv "additional-repositories/*" ".."          
+          mv additional-repositories/* ..          
 
       - name: Tree Affter Fix Locations
         run: |
