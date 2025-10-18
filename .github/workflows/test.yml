@@ -24,12 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Main Repo
-        uses: actions/checkout@v4        
-
-      - name: Checkout Aditional Repo
-        uses: actions/checkout@v4
-        with: 
-          path: {{ github.workspace }}/repo2
+        uses: actions/checkout@v4             
 
       - name: Checkout Aditional Repo
         uses: actions/checkout@v4
@@ -42,7 +37,6 @@ jobs:
 
       - name: Move additional repo to be a sibling of the main repo
         run: |
-          echo "${PWD}"
           mv additional-repositories/* ..          
 
       - name: Tree Affter Fix Locations
