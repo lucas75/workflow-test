@@ -1,6 +1,6 @@
 {
   "repos": [
-    { "repo": "some-owner/repo1", "ref": "main", "path": "additional-repositories/repo1" },
-    { "repo": "other-owner/repo2", "ref": "develop", "path": "additional-repositories/repo2" }
+    { "repo": "lucas75/workflow-test", "ref": "main", "path": "repo1" },
+    { "repo": "lucas75/workflow-test", "ref": "develop", "path": "repo2" }
   ]
 }
