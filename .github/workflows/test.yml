@@ -45,7 +45,7 @@ jobs:
             path=$(echo "$item" | jq -r '.path')
             echo "Cloning $repo@$ref into $path"
             mkdir -p "$(dirname "$path")"
-            git clone --depth 1 --branch "$ref" "https://x-access-token:${GITHUB_TOKEN}@github.com/${repo}.git" "$path"
+            git clone --depth 1 --branch "$ref" "https://x-access-token:${GITHUB_TOKEN}@github.com/${repo}.git" "additional-repositories/$path"
           done
           mv additional-repositories/* ..
 
