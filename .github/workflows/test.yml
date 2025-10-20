@@ -26,18 +26,32 @@ jobs:
       - name: Checkout Main Repo
         uses: actions/checkout@v4             
 
-      - name: Checkout Aditional Repo
-        uses: actions/checkout@v4
-        with: 
-          path: additional-repositories/repo2
+      - name: Checkout additional repositories from JSON
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          JSON_FILE=".github/additional-repos.json"
+          if [ ! -f "$JSON_FILE" ]; then
+            echo "No additional repos JSON found at $JSON_FILE; skipping."
+            exit 0
+          fi
+          sudo apt-get update -y
+          sudo apt-get install -y jq git
+          mkdir -p additional-repositories
+          jq -c '.repos[]' "$JSON_FILE" | while read -r item; do
+            repo=$(echo "$item" | jq -r '.repo')
+            ref=$(echo "$item" | jq -r '.ref // "main"')
+            path=$(echo "$item" | jq -r '.path')
+            echo "Cloning $repo@$ref into $path"
+            mkdir -p "$(dirname "$path")"
+            git clone --depth 1 --branch "$ref" "https://x-access-token:${GITHUB_TOKEN}@github.com/${repo}.git" "additional-repositories/$path"
+          done
+          mv additional-repositories/* ..
 
       - name: Tree Affter Checkout
         run: |
-          tree $GITHUB_WORKSPACE/..
-
-      - name: Move additional repo to be a sibling of the main repo
-        run: |
-          mv additional-repositories/* ..          
+          tree $GITHUB_WORKSPACE/..                 
 
       - name: Tree Affter Fix Locations
         run: |
