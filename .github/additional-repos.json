@@ -1,0 +1,6 @@
+{
+  "repos": [
+    { "repo": "some-owner/repo1", "ref": "main", "path": "additional-repositories/repo1" },
+    { "repo": "other-owner/repo2", "ref": "develop", "path": "additional-repositories/repo2" }
+  ]
+}
